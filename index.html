@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ikrom WebDev — Pengembang Web Profesional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        goldLight: '#F4E4BC',
+                        goldDark: '#B8860B',
+                        navy: '#0A1629',
+                        navyLight: '#132744',
+                        emerald: '#10B981',
+                        sapphire: '#2563EB',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Playfair Display', 'serif'],
+                        mono: ['Courier New', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-gold-gradient {
+                background: linear-gradient(135deg, #D4AF37, #F4E4BC, #D4AF37, #B8860B);
+                background-size: 200% auto;
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                animation: goldShine 4s linear infinite;
+            }
+            .text-silver-gradient {
+                background: linear-gradient(135deg, #E5E7EB, #FFFFFF, #D1D5DB, #F9FAFB);
+                background-size: 200% auto;
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                animation: silverShine 5s linear infinite;
+            }
+            .luxury-border {
+                position: relative;
+                border: 1px solid rgba(212, 175, 55, 0.3);
+                overflow: hidden;
+            }
+            .luxury-border::before {
+                content: '';
+                position: absolute;
+                top: 0; left: -100%;
+                width: 100%; height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+                animation: borderSweep 3s infinite;
+            }
+            .luxury-card {
+                background: linear-gradient(145deg, rgba(19, 39, 68, 0.7), rgba(10, 22, 41, 0.8));
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(212, 175, 55, 0.2);
+                transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+            .luxury-card:hover {
+                transform: translateY(-8px) scale(1.01);
+                border-color: rgba(212, 175, 55, 0.5);
+                box-shadow: 0 20px 60px rgba(212, 175, 55, 0.15),
+                            0 0 40px rgba(37, 99, 235, 0.1),
+                            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            }
+            .glow-gold {
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.3),
+                            0 0 30px rgba(212, 175, 55, 0.1);
+            }
+            .glow-soft {
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            }
+            .particles {
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: 0;
+            }
+            .particle {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(212, 175, 55, 0.4);
+                filter: blur(1px);
+            }
+            .float-slow { animation: floatSlow 10s ease-in-out infinite; }
+            .float-med { animation: floatMed 7s ease-in-out infinite; }
+            .float-fast { animation: floatFast 4s ease-in-out infinite; }
+            .pulse-gold { animation: pulseGold 3s ease-in-out infinite; }
+            .fade-up {
+                opacity: 0;
+                transform: translateY(40px);
+                transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+            .fade-up.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .line-reveal {
+                position: relative;
+                overflow: hidden;
+            }
+            .line-reveal::after {
+                content: '';
+                position: absolute;
+                bottom: 0; left: 0;
+                width: 0; height: 2px;
+                background: linear-gradient(90deg, #D4AF37, transparent);
+                transition: width 0.8s ease;
+            }
+            .line-reveal:hover::after {
+                width: 100%;
+            }
+            .shimmer-btn {
+                position: relative;
+                overflow: hidden;
+            }
+            .shimmer-btn::before {
+                content: '';
+                position: absolute;
+                top: 0; left: -100%;
+                width: 100%; height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.6s ease;
+            }
+            .shimmer-btn:hover::before {
+                left: 100%;
+            }
+
+            @keyframes goldShine {
+                0% { background-position: 0% center; }
+                100% { background-position: 200% center; }
+            }
+            @keyframes silverShine {
+                0% { background-position: 0% center; }
+                100% { background-position: 200% center; }
+            }
+            @keyframes borderSweep {
+                0% { left: -100%; }
+                100% { left: 100%; }
+            }
+            @keyframes floatSlow {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                50% { transform: translateY(-20px) rotate(3deg); }
+            }
+            @keyframes floatMed {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-12px); }
+            }
+            @keyframes floatFast {
+                0%, 100% { transform: translateY(0) scale(1); }
+                50% { transform: translateY(-6px) scale(1.02); }
+            }
+            @keyframes pulseGold {
+                0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+                50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6), 0 0 60px rgba(212, 175, 55, 0.2); }
+            }
+            @keyframes cursorGlow {
+                0% { transform: translate(-50%, -50%) scale(1); }
+                50% { transform: translate(-50%, -50%) scale(1.2); }
+                100% { transform: translate(-50%, -50%) scale(1); }
+            }
+        }
+    </style>
+</head>
+<body class="bg-navy text-gray-100 min-h-screen relative overflow-x-hidden">
+
+    <!-- Partikel Latar Belakang -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Cahaya Mengikuti Kursor -->
+    <div id="cursorGlow" class="fixed w-96 h-96 rounded-full pointer-events-none z-0" style="background: radial-gradient(circle, rgba(212, 175, 55, 0.06), transparent 70%); transform: translate(-50%, -50%); transition: all 0.15s ease-out;"></div>
+
+    <!-- Garis Hiasan Atas -->
+    <div class="fixed top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent z-50"></div>
+
+    <!-- Header -->
+    <header class="relative z-10 px-6 pt-12 pb-8">
+        <div class="max-w-5xl mx-auto text-center fade-up">
+            <p class="text-gold/70 tracking-[0.3em] uppercase text-sm mb-3">Pengembang Web & Solusi Digital</p>
+            <h1 class="text-[clamp(2.2rem,6vw,4rem)] font-bold mb-4">
+                <span class="text-gold-gradient font-display">Ikrom Walidaini</span>
+            </h1>
+            <p class="text-silver-gradient text-xl md:text-2xl font-light mb-2">ikromwebdev</p>
+            <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Mengubah ide menjadi karya digital yang kokoh, indah, dan bermakna
+            </p>
+            <div class="mt-8 flex justify-center gap-3 flex-wrap">
+                <span class="px-4 py-2 rounded-full border border-gold/30 text-goldLight text-sm backdrop-blur-sm">
+                    <i class="fa fa-code mr-2"></i>HTML · CSS · JavaScript
+                </span>
+                <span class="px-4 py-2 rounded-full border border-sapphire/30 text-sky-300 text-sm backdrop-blur-sm">
+                    <i class="fa fa-globe mr-2"></i>Siap Tayang Global
+                </span>
+                <span class="px-4 py-2 rounded-full border border-emerald/30 text-emerald-300 text-sm backdrop-blur-sm">
+                    <i class="fa fa-shield mr-2"></i>Terpercaya
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="max-w-5xl mx-auto px-6 pb-20 space-y-10 relative z-10">
+
+        <!-- Bagian 1: Pernyataan -->
+        <section class="luxury-card rounded-2xl p-8 md:p-10 fade-up">
+            <h2 class="text-2xl md:text-3xl font-display text-gold mb-6 line-reveal inline-block">
+                <i class="fa fa-balance-scale mr-3"></i>Tanggung Jawab Saya
+            </h2>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-200 mb-6">
+                Sebagai Pengembang Web, saya bertanggung jawab atas <span class="text-gold font-semibold">seluruh hasil karya</span> dan jasa yang saya tawarkan. Setiap baris kode, setiap tampilan, dan setiap fungsi — dikerjakan dengan ketelitian, kejujuran, dan dedikasi penuh.
+            </p>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-xl border border-white/5 hover:border-gold/30 transition-all">
+                    <i class="fa fa-check-circle text-gold text-xl mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-white">Revisi Tanpa Batas</h3>
+                        <p class="text-gray-400 text-sm mt-1">Disesuaikan sampai kamu benar-benar puas</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-xl border border-white/5 hover:border-gold/30 transition-all">
+                    <i class="fa fa-tags text-gold text-xl mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-white">Harga Terjangkau</h3>
+                        <p class="text-gray-400 text-sm mt-1">Kualitas tinggi dengan nilai yang sepadan</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-xl border border-white/5 hover:border-gold/30 transition-all">
+                    <i class="fa fa-magic text-gold text-xl mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-white">Dari Sederhana Hingga Canggih</h3>
+                        <p class="text-gray-400 text-sm mt-1">Semua jenis kebutuhan digital saya kerjakan</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-xl border border-white/5 hover:border-gold/30 transition-all">
+                    <i class="fa fa-paint-brush text-gold text-xl mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-white">Ratusan Gaya & Efek</h3>
+                        <p class="text-gray-400 text-sm mt-1">Tampilan unik, eksklusif, dan hidup</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-xl border border-white/5 hover:border-gold/30 transition-all md:col-span-2">
+                    <i class="fa fa-cubes text-gold text-xl mt-1"></i>
+                    <div>
+                        <h3 class="font-semibold text-white">Aplikasi Berbasis Web — Tanpa Batas</h3>
+                        <p class="text-gray-400 text-sm mt-1">Satu pola bisa dikembangkan menjadi ratusan bentuk baru. Satu dasar bisa tumbuh menjadi sistem yang tak terbayangkan sebelumnya.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian 2: Pembelajaran -->
+        <section class="luxury-card rounded-2xl p-8 md:p-10 fade-up">
+            <h2 class="text-2xl md:text-3xl font-display text-gold mb-6 line-reveal inline-block">
+                <i class="fa fa-graduation-cap mr-3"></i>Ilmu yang Saya Bagikan
+            </h2>
+            <p class="text-gray-300 mb-6">
+                Karya bukan sekadar hasil — ia juga jalan bagi orang lain untuk belajar. Saya buka jalannya, agar kamu pun bisa menciptakan milikmu sendiri.
+            </p>
+            <div class="space-y-4">
+                <div class="p-5 bg-gradient-to-r from-gold/10 to-transparent rounded-xl border-l-2 border-gold hover:pl-6 transition-all">
+                    <h3 class="font-semibold text-lg text-white mb-1">📚 Tutorial Lengkap Pembuatan Website</h3>
+                    <p class="text-gray-400">Langkah demi langkah, dari nol sampai tayang — dipahami oleh siapa saja</p>
+                </div>
+                <div class="p-5 bg-gradient-to-r from-sapphire/10 to-transparent rounded-xl border-l-2 border-sapphire hover:pl-6 transition-all">
+                    <h3 class="font-semibold text-lg text-white mb-1">💻 Belajar Pemrograman</h3>
+                    <p class="text-gray-400">HTML · CSS · JavaScript — dasar yang kokoh, dipahami secara utuh</p>
+                </div>
+                <div class="p-5 bg-gradient-to-r from-emerald/10 to-transparent rounded-xl border-l-2 border-emerald hover:pl-6 transition-all">
+                    <h3 class="font-semibold text-lg text-white mb-1">🚀 Pembuatan Halaman & Sistem</h3>
+                    <p class="text-gray-400">Dari tampilan sederhana hingga sistem yang berfungsi — tuntas dan terarah</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian 3: Penutup & Kontak -->
+        <section class="luxury-border rounded-2xl p-8 md:p-10 text-center fade-up glow-soft bg-navyLight/50">
+            <h2 class="text-2xl md:text-3xl font-display text-gold mb-4">Siap Mewujudkan Ide Digitalmu? 🤝</h2>
+            <p class="text-gray-300 text-lg max-w-xl mx-auto mb-8">
+                Setiap ide layak untuk diwujudkan. Mari kita bicarakan, rencanakan, dan bangun bersama — dengan ketulusan, keterampilan, dan komitmen penuh.
+            </p>
+            <a href="mailto:ikromwalidaini60@gmail.com" class="inline-block px-8 py-4 bg-gradient-to-r from-goldDark via-gold to-goldDark text-navy font-bold rounded-xl shimmer-btn pulse-gold hover:scale-105 transition-all">
+                <i class="fa fa-envelope mr-2"></i>ikromwalidaini60@gmail.com
+            </a>
+            <p class="mt-6 text-gray-500 text-sm">
+                Atau hubungi langsung untuk berdiskusi lebih lanjut
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-gray-500 text-sm relative z-10 border-t border-white/5">
+        <p>© 2026 Ikrom Walidaini (ikromwebdev) — Semua Karya Dilindungi</p>
+        <p class="mt-2 text-xs text-gray-600">Dibuat dengan ketulusan, ketekunan, dan semangat yang tak pernah padam ✨</p>
+    </footer>
+
+    <!-- Tombol Kembali ke Atas -->
+    <button id="backTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold/20 border border-gold/40 text-gold flex items-center justify-center opacity-0 invisible transition-all duration-300 z-20 hover:bg-gold/40">
+        <i class="fa fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // 1. Partikel Emas Berterbangan
+        const pContainer = document.getElementById('particles');
+        for (let i = 0; i < 40; i++) {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            const size = Math.random() * 4 + 1;
+            p.style.width = `${size}px`;
+            p.style.height = `${size}px`;
+            p.style.left = `${Math.random() * 100}%`;
+            p.style.top = `${Math.random() * 100}%`;
+            p.style.opacity = Math.random() * 0.5 + 0.1;
+            const dur = 8 + Math.random() * 12;
+            p.style.animation = `floatSlow ${dur}s infinite ease-in-out ${Math.random() * 8}s`;
+            pContainer.appendChild(p);
+        }
+
+        // 2. Cahaya Mengikuti Kursor
+        const glow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = `${e.clientX}px`;
+            glow.style.top = `${e.clientY + window.scrollY}px`;
+        });
+
+        // 3. Muncul Saat Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // 4. Tombol Kembali ke Atas
+        const btn = document.getElementById('backTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                btn.classList.remove('opacity-0', 'invisible');
+            } else {
+                btn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
